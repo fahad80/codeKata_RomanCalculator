@@ -1,0 +1,5 @@
+#include "foo.h"
+void sample_func()
+{
+    printf("Hello world!\n");
+}
