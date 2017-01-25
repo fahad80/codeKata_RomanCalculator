@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include "romancalc.h"
 
+const int romanDecValue[] 	= {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+const char* romanNumeral[]	= {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
 
 uint16_t roman2dec_char(char romanChar)
 {
@@ -52,8 +54,19 @@ uint16_t roman2dec_str(const char romanStr[])
 
 void dec2roman(uint16_t decNum, char romanNum[])
 {
-	romanNum[0] = 'I';
-	romanNum[1] = 0;
+	uint8_t i = 0;
+	while(decNum != 0)
+	{		
+		while(romanDecValue[i] <= decNum)
+		{
+			decNum -= romanDecValue[i];
+			strcpy(romanNum,romanNumeral[i]);
+			romanNum += strlen(romanNumeral[i]); 
+		}
+		i++;		
+	}
+	
+	*romanNum = 0;
 }
 
 

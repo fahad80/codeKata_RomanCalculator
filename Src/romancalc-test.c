@@ -29,6 +29,10 @@ START_TEST(romancalcTest)
 	char buffer[20];
 	dec2roman(1, buffer);
 	ck_assert_str_eq(buffer,"I");
+	dec2roman(2, buffer);
+	ck_assert_str_eq(buffer,"II");
+	dec2roman(4999, buffer);
+	ck_assert_str_eq(buffer,"MMMMCMXCIX");
 }
 END_TEST
 
