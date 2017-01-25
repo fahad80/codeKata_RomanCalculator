@@ -66,7 +66,7 @@ void dec2roman(uint16_t decNum, char romanNum[])
 		i++;		
 	}
 	
-	*romanNum = 0;
+	gi*romanNum = 0;
 }
 
 
