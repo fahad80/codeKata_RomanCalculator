@@ -4,7 +4,7 @@
 #include "romancalc.h"
 
 
-uint16_t roman2decimal_char(char romanChar)
+uint16_t roman2dec_char(char romanChar)
 {
 	switch(toupper(romanChar))
 	{
@@ -20,7 +20,7 @@ uint16_t roman2decimal_char(char romanChar)
 }
 
 
-uint16_t roman2decimal_str(const char romanStr[])
+uint16_t roman2dec_str(const char romanStr[])
 {
 	int8_t romanStrLen = strlen(romanStr);
 	if(romanStrLen < 1) 
@@ -33,7 +33,7 @@ uint16_t roman2decimal_str(const char romanStr[])
 	int8_t i;
 	for(i = 0; i < romanStrLen; i++)
 	{
-		*(romanEquDecVals + i) = roman2decimal_char(romanStr[i]);
+		romanEquDecVals[i] = roman2dec_char(romanStr[i]);
 	}
 	
 	uint16_t decimalVal = romanEquDecVals[romanStrLen-1];
@@ -48,6 +48,12 @@ uint16_t roman2decimal_str(const char romanStr[])
 	free(romanEquDecVals);
 	
 	return decimalVal; 
+}
+
+void dec2roman(uint16_t decNum, char romanNum[])
+{
+	romanNum[0] = 'I';
+	romanNum[1] = 0;
 }
 
 

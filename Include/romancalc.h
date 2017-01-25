@@ -4,8 +4,9 @@
 
 #include <stdio.h>
 #include <stdint.h>
-uint16_t roman2decimal_char(char);
-uint16_t roman2decimal_str(const char*);
+uint16_t roman2dec_char(char);
+uint16_t roman2dec_str(const char*);
+void dec2roman(uint16_t, char*);
 
 
 #endif /* ROMANCALC_H */

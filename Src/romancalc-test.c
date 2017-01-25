@@ -14,17 +14,21 @@ START_TEST(romancalcTest)
 #line 5
 
 	
-	ck_assert_int_eq(roman2decimal_char('1'), 0);
-	ck_assert_int_eq(roman2decimal_char('m'), 1000);
-	ck_assert_int_eq(roman2decimal_char('X'), 10);
-	ck_assert_int_eq(roman2decimal_char('b'), 0);
+	ck_assert_int_eq(roman2dec_char('1'), 0);
+	ck_assert_int_eq(roman2dec_char('m'), 1000);
+	ck_assert_int_eq(roman2dec_char('X'), 10);
+	ck_assert_int_eq(roman2dec_char('b'), 0);
 	
 
 	
-	ck_assert_int_eq(roman2decimal_str("XXVIII"), 28);
-	ck_assert_int_eq(roman2decimal_str("m"), 1000);
-	ck_assert_int_eq(roman2decimal_str("lXxXvIiI"), 88);
-	ck_assert_int_eq(roman2decimal_str("MMMMCMXCIX"), 4999);
+	ck_assert_int_eq(roman2dec_str("XXVIII"), 28);
+	ck_assert_int_eq(roman2dec_str("m"), 1000);
+	ck_assert_int_eq(roman2dec_str("lXxXvIiI"), 88);
+	ck_assert_int_eq(roman2dec_str("MMMMCMXCIX"), 4999);
+
+	char buffer[20];
+	dec2roman(1, buffer);
+	ck_assert_str_eq(buffer,"I");
 }
 END_TEST
 
