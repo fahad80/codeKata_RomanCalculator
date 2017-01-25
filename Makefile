@@ -3,13 +3,14 @@ CC = gcc
 INC_DIR = ./Include
 SRC_DIR = ./Src
 OBJ_DIR = ./Object
-CFLAGS  = -c -Wall
-SRCS = $(SRC_DIR)/main.c $(SRC_DIR)/foo.c
-OBJS = $(OBJ_DIR)/main.o $(OBJ_DIR)/foo.o
+CFLAGS  =-c -Wall
+SRCS = $(SRC_DIR)/main.c $(SRC_DIR)/romancalc.c
+OBJS = $(OBJ_DIR)/main.o $(OBJ_DIR)/romancalc.o
 INCLUDES = -I$(INC_DIR)
 
 EXEC = romanCalc
 
+LIBS=-lcheck
 
 .PHONY: all clean
  
@@ -21,9 +22,20 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 	
 
+test: romanCalcTest
+	./romanCalcTest
+	
+romanCalcTest: $(OBJ_DIR)/romancalc-test.o $(OBJ_DIR)/romancalc.o
+	gcc -o romanCalcTest $(OBJ_DIR)/romancalc.o $(OBJ_DIR)/romancalc-test.o $(LIBS)
 
+$(OBJ_DIR)/romancalc-test.o: $(SRC_DIR)/romancalc-test.c
+	$(CC) $(CFLAGS) $(INCLUDES) $(SRC_DIR)/romancalc-test.c -o $(OBJ_DIR)/romancalc-test.o
+
+$(SRC_DIR)/romancalc-test.c: $(SRC_DIR)/romancalc-test.check
+	checkmk $(SRC_DIR)/romancalc-test.check >$(SRC_DIR)/romancalc-test.c
  
 clean:
 	@echo "Cleaning up.."
 	-rm -rf $(OBJ_DIR)/*.o
 	-rm $(EXEC)
+	-rm romanCalcTest

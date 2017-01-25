@@ -1,0 +1,4 @@
+#include "romancalc.h"
+
+#test romancalcTest
+	fail_unless(sample_func() == 1, "function is not working");
