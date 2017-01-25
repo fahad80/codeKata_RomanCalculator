@@ -11,7 +11,10 @@
 START_TEST(romancalcTest)
 {
 #line 4
-	fail_unless(roman2decimalSingleChar('1') == 1, "function is not working");
+	fail_unless(roman2decimalSingleChar('1') == -1, "test1 is not working");
+	fail_unless(roman2decimalSingleChar('m') == 1000, "test2 is not working");
+	fail_unless(roman2decimalSingleChar('X') == 10, "test3 is not working");
+	fail_unless(roman2decimalSingleChar('b') == -1, "test4 is not working");
 }
 END_TEST
 

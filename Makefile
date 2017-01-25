@@ -40,3 +40,7 @@ clean:
 	-rm $(EXEC)
 	-rm romanCalcTest
 	-rm $(SRC_DIR)/romancalc-test.c
+	
+cleanTest:
+	-rm romanCalcTest
+	-rm $(SRC_DIR)/romancalc-test.c
