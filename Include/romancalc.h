@@ -3,7 +3,9 @@
 #define ROMANCALC_H
 
 #include <stdio.h>
-int roman2decimalSingleChar(char);
-
+#include <stdint.h>
+uint16_t roman2decimalSingleChar(char);
+uint16_t roman2decimal(char*);
+void strupr(char*);
 
 #endif /* ROMANCALC_H */

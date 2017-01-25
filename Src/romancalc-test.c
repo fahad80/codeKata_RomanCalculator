@@ -7,14 +7,22 @@
 
 #line 1 "./Src/romancalc-test.check"
 #include "romancalc.h"
+#include <stdlib.h>
 
 START_TEST(romancalcTest)
 {
-#line 4
-	fail_unless(roman2decimalSingleChar('1') == -1, "test1 is not working");
-	fail_unless(roman2decimalSingleChar('m') == 1000, "test2 is not working");
-	fail_unless(roman2decimalSingleChar('X') == 10, "test3 is not working");
-	fail_unless(roman2decimalSingleChar('b') == -1, "test4 is not working");
+#line 5
+
+	
+	ck_assert_int_eq(roman2decimalSingleChar('1'), 0);
+	ck_assert_int_eq(roman2decimalSingleChar('m'), 1000);
+	ck_assert_int_eq(roman2decimalSingleChar('X'), 10);
+	ck_assert_int_eq(roman2decimalSingleChar('b'), 0);
+	
+	char str[] = "sAd";
+	strupr(str);
+	ck_assert_str_eq(str,"SAD");
+	fail_unless(roman2decimal("mxB") == 3, "test6 is not working");
 }
 END_TEST
 
