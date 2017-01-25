@@ -1,12 +1,12 @@
 #include <ctype.h>
 #include <string.h>
+#include <stdlib.h>
 #include "romancalc.h"
 
 
-uint16_t roman2decimalSingleChar(char romanChar)
+uint16_t roman2decimal_char(char romanChar)
 {
-	romanChar = toupper(romanChar);
-	switch(romanChar)
+	switch(toupper(romanChar))
 	{
 		case 'I': return 1;
 		case 'V': return 5;
@@ -20,22 +20,34 @@ uint16_t roman2decimalSingleChar(char romanChar)
 }
 
 
-
-uint16_t roman2decimal(char romanString[])
+uint16_t roman2decimal_str(const char romanStr[])
 {
-	// Max Roman Value (= 4999) requires 10digits 
-	char romanStr[20]; 
-	strcpy(romanStr,romanString);
-	strupr(romanStr);
-	return strlen(romanStr); 
+	int8_t romanStrLen = strlen(romanStr);
+	if(romanStrLen < 1) 
+		return 0;
+	
+
+	
+	uint16_t* romanEquDecVals = (uint16_t*) malloc(romanStrLen * sizeof(uint16_t));
+	
+	int8_t i;
+	for(i = 0; i < romanStrLen; i++)
+	{
+		*(romanEquDecVals + i) = roman2decimal_char(romanStr[i]);
+	}
+	
+	uint16_t decimalVal = romanEquDecVals[romanStrLen-1];
+	for(i = romanStrLen-2; i >= 0; i--)
+	{
+		if(romanEquDecVals[i] < romanEquDecVals[i+1])
+			decimalVal = decimalVal - romanEquDecVals[i];
+		else
+			decimalVal = decimalVal + romanEquDecVals[i];
+	}
+	
+	free(romanEquDecVals);
+	
+	return decimalVal; 
 }
 
-void strupr(char s[])
-{
-	char *tmp = s;
 
-    for (;*tmp;tmp++) 
-    {
-        *tmp = toupper(*tmp);
-    }
-}
