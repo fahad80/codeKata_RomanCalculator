@@ -4,12 +4,14 @@
 #test romancalcTest
 
 	
-	ck_assert_int_eq(roman2decimalSingleChar('1'), 0);
-	ck_assert_int_eq(roman2decimalSingleChar('m'), 1000);
-	ck_assert_int_eq(roman2decimalSingleChar('X'), 10);
-	ck_assert_int_eq(roman2decimalSingleChar('b'), 0);
+	ck_assert_int_eq(roman2decimal_char('1'), 0);
+	ck_assert_int_eq(roman2decimal_char('m'), 1000);
+	ck_assert_int_eq(roman2decimal_char('X'), 10);
+	ck_assert_int_eq(roman2decimal_char('b'), 0);
 	
-	char str[] = "sAd";
-	strupr(str);
-	ck_assert_str_eq(str,"SAD");
-	fail_unless(roman2decimal("mxB") == 3, "test6 is not working");
+
+	
+	ck_assert_int_eq(roman2decimal_str("XXVIII"), 28);
+	ck_assert_int_eq(roman2decimal_str("m"), 1000);
+	ck_assert_int_eq(roman2decimal_str("lXxXvIiI"), 88);
+	ck_assert_int_eq(roman2decimal_str("MMMMCMXCIX"), 4999);
