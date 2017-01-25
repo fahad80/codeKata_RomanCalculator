@@ -11,7 +11,7 @@
 START_TEST(romancalcTest)
 {
 #line 4
-	fail_unless(sample_func() == 1, "function is not working");
+	fail_unless(roman2decimalSingleChar('1') == 1, "function is not working");
 }
 END_TEST
 

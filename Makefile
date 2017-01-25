@@ -39,3 +39,4 @@ clean:
 	-rm -rf $(OBJ_DIR)/*.o
 	-rm $(EXEC)
 	-rm romanCalcTest
+	-rm $(SRC_DIR)/romancalc-test.c

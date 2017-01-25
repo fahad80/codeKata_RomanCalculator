@@ -1,7 +1,6 @@
 #include "romancalc.h"
 
-int sample_func()
+int roman2decimalSingleChar(char romanChar)
 {
-    printf("Hello world!\n");
     return 1;
 }

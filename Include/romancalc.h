@@ -3,7 +3,7 @@
 #define ROMANCALC_H
 
 #include <stdio.h>
-int sample_func();
+int roman2decimalSingleChar(char);
 
 
 #endif /* ROMANCALC_H */
