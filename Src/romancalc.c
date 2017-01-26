@@ -6,6 +6,7 @@
 const int romanDecValue[] 	= {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
 const char* romanNumeral[]	= {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
 
+
 uint16_t roman2dec_char(char romanChar)
 {
 	switch(toupper(romanChar))
@@ -30,26 +31,26 @@ uint16_t roman2dec_str(const char romanStr[])
 	
 
 	
-	uint16_t* romanEquDecVals = (uint16_t*) malloc(romanStrLen * sizeof(uint16_t));
+	uint16_t resultDeclVal = 0;
+	uint16_t romanEquDecVal;
+	uint16_t prevDecValue = 0;
 	
 	int8_t i;
-	for(i = 0; i < romanStrLen; i++)
+	for(i = romanStrLen-1; i >= 0; i--)
 	{
-		romanEquDecVals[i] = roman2dec_char(romanStr[i]);
-	}
-	
-	uint16_t decimalVal = romanEquDecVals[romanStrLen-1];
-	for(i = romanStrLen-2; i >= 0; i--)
-	{
-		if(romanEquDecVals[i] < romanEquDecVals[i+1])
-			decimalVal = decimalVal - romanEquDecVals[i];
+		romanEquDecVal = roman2dec_char(romanStr[i]);
+		if(romanEquDecVal == 0)
+			return 0;
+		
+		if (romanEquDecVal < prevDecValue)
+			resultDeclVal -= romanEquDecVal;
 		else
-			decimalVal = decimalVal + romanEquDecVals[i];
+			resultDeclVal += romanEquDecVal;
+		
+		prevDecValue = romanEquDecVal;
 	}
-	
-	free(romanEquDecVals);
-	
-	return decimalVal; 
+
+	return resultDeclVal; 
 }
 
 void dec2roman(uint16_t decNum, char romanNum[])
@@ -66,7 +67,21 @@ void dec2roman(uint16_t decNum, char romanNum[])
 		i++;		
 	}
 	
-	gi*romanNum = 0;
+	*romanNum = 0;
 }
 
 
+uint8_t isItValidRomanNum(const char suppliedRomanNum[])
+{
+	uint16_t decVal = roman2dec_str(suppliedRomanNum);
+	if(decVal == 0)
+		return 0;
+	
+	char convertedRomanNum[20];
+	dec2roman(decVal,convertedRomanNum);
+	
+	if(strcmp(suppliedRomanNum, convertedRomanNum) == 0)
+		return 1;
+	else
+		return 0;
+}

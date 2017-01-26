@@ -13,19 +13,21 @@ START_TEST(romancalcTest)
 {
 #line 5
 
-	
+	// check roman2dec_char
 	ck_assert_int_eq(roman2dec_char('1'), 0);
 	ck_assert_int_eq(roman2dec_char('m'), 1000);
 	ck_assert_int_eq(roman2dec_char('X'), 10);
 	ck_assert_int_eq(roman2dec_char('b'), 0);
 	
 
-	
-	ck_assert_int_eq(roman2dec_str("XXVIII"), 28);
+	// check roman2dec_str
+	ck_assert_int_eq(roman2dec_str(""), 0);
 	ck_assert_int_eq(roman2dec_str("m"), 1000);
 	ck_assert_int_eq(roman2dec_str("lXxXvIiI"), 88);
-	ck_assert_int_eq(roman2dec_str("MMMMCMXCIX"), 4999);
+	ck_assert_int_eq(roman2dec_str("MMMACIX"), 0);
 
+
+	// check dec2roman 
 	char buffer[20];
 	dec2roman(1, buffer);
 	ck_assert_str_eq(buffer,"I");
@@ -33,6 +35,13 @@ START_TEST(romancalcTest)
 	ck_assert_str_eq(buffer,"II");
 	dec2roman(4999, buffer);
 	ck_assert_str_eq(buffer,"MMMMCMXCIX");
+
+	// check isItValidRomanNumeral
+	ck_assert_int_eq(isItValidRomanNum("X"),1);
+	ck_assert_int_eq(isItValidRomanNum("IIX"),0);
+	ck_assert_int_eq(isItValidRomanNum("XBI"),0);
+	ck_assert_int_eq(isItValidRomanNum("XXXX"),0);
+	ck_assert_int_eq(isItValidRomanNum("DD"),0);
 }
 END_TEST
 
