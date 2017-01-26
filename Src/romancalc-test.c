@@ -25,16 +25,17 @@ START_TEST(romancalcTest)
 	ck_assert_int_eq(roman2dec_str("m"), 1000);
 	ck_assert_int_eq(roman2dec_str("lXxXvIiI"), 88);
 	ck_assert_int_eq(roman2dec_str("MMMACIX"), 0);
+	ck_assert_int_eq(roman2dec_str("MMMMMXII"), 0);
 
 
 	// check dec2roman 
 	char buffer[20];
 	dec2roman(1, buffer);
 	ck_assert_str_eq(buffer,"I");
-	dec2roman(2, buffer);
-	ck_assert_str_eq(buffer,"II");
 	dec2roman(4999, buffer);
 	ck_assert_str_eq(buffer,"MMMMCMXCIX");
+	ck_assert_int_eq(dec2roman(4999, buffer), 1);
+	ck_assert_int_eq(dec2roman(5000, buffer), 0);
 
 	// check isItValidRomanNumeral
 	ck_assert_int_eq(isItValidRomanNum("X"),1);
