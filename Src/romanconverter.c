@@ -4,7 +4,7 @@
 #include "romanconverter.h"
 
 const int romanDecValue[] 	= {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
-const char* romanNumeral[]	= {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+const char *romanNumeral[]	= {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
 
 
 uint16_t roman2dec_char(char romanChar)

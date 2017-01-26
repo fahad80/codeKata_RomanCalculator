@@ -7,11 +7,12 @@
 
 #line 1 "./Src/roman-test.check"
 #include "romanconverter.h"
+#include "romancalculator.h"
 #include <stdlib.h>
 
-START_TEST(romanTest)
+START_TEST(romanConverterTest)
 {
-#line 5
+#line 6
 
 	char buffer[20];
 	
@@ -46,6 +47,17 @@ START_TEST(romanTest)
 	ck_assert_int_eq(isItValidRomanNum("XBI"),0);
 	ck_assert_int_eq(isItValidRomanNum("XXXX"),0);
 	ck_assert_int_eq(isItValidRomanNum("DD"),0);
+
+
+}
+END_TEST
+
+START_TEST(romanCalcTest)
+{
+#line 43
+	char buffer[20];
+	
+	ck_assert_int_eq(add2romanNum("I", "I", buffer), 1);
 }
 END_TEST
 
@@ -57,7 +69,8 @@ int main(void)
     int nf;
 
     suite_add_tcase(s1, tc1_1);
-    tcase_add_test(tc1_1, romanTest);
+    tcase_add_test(tc1_1, romanConverterTest);
+    tcase_add_test(tc1_1, romanCalcTest);
 
     srunner_run_all(sr, CK_ENV);
     nf = srunner_ntests_failed(sr);
