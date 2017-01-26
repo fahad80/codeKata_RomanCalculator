@@ -49,7 +49,18 @@ uint16_t roman2dec_str(const char romanStr[])
 		
 		prevDecValue = romanEquDecVal;
 	}
-
+	
+	{
+		char convertedRomanNum[20];
+		dec2roman(resultDeclVal,convertedRomanNum);
+		
+		char copiedRomanStr[20];
+		strcpy(copiedRomanStr,romanStr);
+		strupr(copiedRomanStr);
+		if(strcmp(copiedRomanStr, convertedRomanNum) != 0)
+			return 0;
+	}
+		
 	return resultDeclVal; 
 }
 
@@ -77,11 +88,15 @@ uint8_t isItValidRomanNum(const char suppliedRomanNum[])
 	if(decVal == 0)
 		return 0;
 	
-	char convertedRomanNum[20];
-	dec2roman(decVal,convertedRomanNum);
-	
-	if(strcmp(suppliedRomanNum, convertedRomanNum) == 0)
-		return 1;
-	else
-		return 0;
+	return 1;
+}
+
+void strupr(char s[])
+{
+	char *tmp = s;
+
+    for (;*tmp;tmp++) 
+    {
+        *tmp = toupper(*tmp);
+    }
 }
