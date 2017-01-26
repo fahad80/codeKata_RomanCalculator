@@ -15,7 +15,7 @@ LIBS=-lcheck
 .PHONY: all clean
  
 all: $(OBJS)
-	#$(CC) $(OBJS) -o $(EXEC)
+#$(CC) $(OBJS) -o $(EXEC)
  
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
@@ -25,8 +25,8 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 test: romanTest
 	./romanTest
 	
-romanTest: $(OBJ_DIR)/roman-test.o $(OBJ_DIR)/romanconverter.o
-	gcc -o romanTest $(OBJ_DIR)/romanconverter.o $(OBJ_DIR)/roman-test.o $(LIBS)
+romanTest: $(OBJ_DIR)/roman-test.o $(OBJ_DIR)/romanconverter.o $(OBJ_DIR)/romancalculator.o
+	gcc -o romanTest $(OBJ_DIR)/romanconverter.o $(OBJ_DIR)/romancalculator.o $(OBJ_DIR)/roman-test.o $(LIBS)
 
 $(OBJ_DIR)/roman-test.o: $(SRC_DIR)/roman-test.c
 	$(CC) $(CFLAGS) $(INCLUDES) $(SRC_DIR)/roman-test.c -o $(OBJ_DIR)/roman-test.o
@@ -37,7 +37,7 @@ $(SRC_DIR)/roman-test.c: $(SRC_DIR)/roman-test.check
 clean:
 	@echo "Cleaning up.."
 	-rm -rf $(OBJ_DIR)/*.o
-	-rm $(EXEC)
+#-rm $(EXEC)
 	-rm romanTest
 	-rm $(SRC_DIR)/roman-test.c
 	
