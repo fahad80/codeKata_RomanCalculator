@@ -1,7 +1,7 @@
 #include <ctype.h>
 #include <string.h>
 #include <stdlib.h>
-#include "romancalc.h"
+#include "romanconverter.h"
 
 const int romanDecValue[] 	= {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
 const char* romanNumeral[]	= {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
@@ -71,7 +71,7 @@ uint8_t dec2roman(uint16_t decNum, char romanNum[])
 {
 	if(decNum > 4999)
 	{
-		*romanNum = 0;
+		*romanNum = '\0';
 		return 0;
 	}
 	
@@ -87,7 +87,7 @@ uint8_t dec2roman(uint16_t decNum, char romanNum[])
 		i++;		
 	}
 	
-	*romanNum = 0;
+	*romanNum = '\0';
 	return 1;
 }
 
@@ -108,11 +108,4 @@ void strupr(char s[])
     {
         *tmp = toupper(*tmp);
     }
-}
-
-
-
-uint8_t add2RomanNumbers(const char romanNum1[], const char romanNum2[], char result[])
-{
-	return 1;
 }

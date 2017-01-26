@@ -4,43 +4,43 @@ INC_DIR = ./Include
 SRC_DIR = ./Src
 OBJ_DIR = ./Object
 CFLAGS  =-c -Wall
-SRCS = $(SRC_DIR)/main.c $(SRC_DIR)/romancalc.c
-OBJS = $(OBJ_DIR)/main.o $(OBJ_DIR)/romancalc.o
+SRCS = $(SRC_DIR)/main.c $(SRC_DIR)/romanconverter.c $(SRC_DIR)/romancalculator.c
+OBJS = $(OBJ_DIR)/main.o $(OBJ_DIR)/romanconverter.o $(OBJ_DIR)/romancalculator.o
 INCLUDES = -I$(INC_DIR)
 
-EXEC = romanCalc
+#EXEC = romanConverter
 
 LIBS=-lcheck
 
 .PHONY: all clean
  
 all: $(OBJS)
-	$(CC) $(OBJS) -o $(EXEC)
+	#$(CC) $(OBJS) -o $(EXEC)
  
-# % pattern wildcard matching
+
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 	
 
-test: romanCalcTest
-	./romanCalcTest
+test: romanTest
+	./romanTest
 	
-romanCalcTest: $(OBJ_DIR)/romancalc-test.o $(OBJ_DIR)/romancalc.o
-	gcc -o romanCalcTest $(OBJ_DIR)/romancalc.o $(OBJ_DIR)/romancalc-test.o $(LIBS)
+romanTest: $(OBJ_DIR)/roman-test.o $(OBJ_DIR)/romanconverter.o
+	gcc -o romanTest $(OBJ_DIR)/romanconverter.o $(OBJ_DIR)/roman-test.o $(LIBS)
 
-$(OBJ_DIR)/romancalc-test.o: $(SRC_DIR)/romancalc-test.c
-	$(CC) $(CFLAGS) $(INCLUDES) $(SRC_DIR)/romancalc-test.c -o $(OBJ_DIR)/romancalc-test.o
+$(OBJ_DIR)/roman-test.o: $(SRC_DIR)/roman-test.c
+	$(CC) $(CFLAGS) $(INCLUDES) $(SRC_DIR)/roman-test.c -o $(OBJ_DIR)/roman-test.o
 
-$(SRC_DIR)/romancalc-test.c: $(SRC_DIR)/romancalc-test.check
-	checkmk $(SRC_DIR)/romancalc-test.check >$(SRC_DIR)/romancalc-test.c
+$(SRC_DIR)/roman-test.c: $(SRC_DIR)/roman-test.check
+	checkmk $(SRC_DIR)/roman-test.check >$(SRC_DIR)/roman-test.c
  
 clean:
 	@echo "Cleaning up.."
 	-rm -rf $(OBJ_DIR)/*.o
 	-rm $(EXEC)
-	-rm romanCalcTest
-	-rm $(SRC_DIR)/romancalc-test.c
+	-rm romanTest
+	-rm $(SRC_DIR)/roman-test.c
 	
 cleanTest:
-	-rm romanCalcTest
-	-rm $(SRC_DIR)/romancalc-test.c
+	-rm romanConverterTest
+	-rm $(SRC_DIR)/roman-test.c
