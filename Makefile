@@ -8,14 +8,14 @@ SRCS = $(SRC_DIR)/main.c $(SRC_DIR)/romanconverter.c $(SRC_DIR)/romancalculator.
 OBJS = $(OBJ_DIR)/main.o $(OBJ_DIR)/romanconverter.o $(OBJ_DIR)/romancalculator.o
 INCLUDES = -I$(INC_DIR)
 
-#EXEC = romanConverter
+EXEC = romanConverter
 
 LIBS=-lcheck
 
 .PHONY: all clean
  
 all: $(OBJS)
-#$(CC) $(OBJS) -o $(EXEC)
+	$(CC) $(OBJS) -o $(EXEC)
  
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
@@ -37,7 +37,7 @@ $(SRC_DIR)/roman-test.c: $(SRC_DIR)/roman-test.check
 clean:
 	@echo "Cleaning up.."
 	-rm -rf $(OBJ_DIR)/*.o
-#-rm $(EXEC)
+	-rm $(EXEC)
 	-rm romanTest
 	-rm $(SRC_DIR)/roman-test.c
 	

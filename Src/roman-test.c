@@ -16,12 +16,6 @@ START_TEST(romanConverterTest)
 
 	char buffer[20];
 	
-	// check roman2dec_char
-	ck_assert_int_eq(roman2dec_char('1'), 0);
-	ck_assert_int_eq(roman2dec_char('m'), 1000);
-	ck_assert_int_eq(roman2dec_char('X'), 10);
-	ck_assert_int_eq(roman2dec_char('b'), 0);
-	
 
 	// check roman2dec_str
 	ck_assert_int_eq(roman2dec_str(""), 0);
@@ -54,7 +48,7 @@ END_TEST
 
 START_TEST(romanCalcTest)
 {
-#line 43
+#line 37
 	char buffer[20];
 	
 	ck_assert_int_eq(add2romanNum("I", "I", buffer), 1);
