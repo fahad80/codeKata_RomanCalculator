@@ -28,10 +28,13 @@ START_TEST(romanConverterTest)
 	// check dec2roman 
 	dec2roman(1, buffer);
 	ck_assert_str_eq(buffer,"I");
+	
 	dec2roman(4999, buffer);
 	ck_assert_str_eq(buffer,"MMMMCMXCIX");
+	
 	dec2roman(5000, buffer);
 	ck_assert_str_eq(buffer,"\0");
+	
 	ck_assert_int_eq(dec2roman(4999, buffer), 1);
 	ck_assert_int_eq(dec2roman(5000, buffer), 0);
 
@@ -48,10 +51,13 @@ END_TEST
 
 START_TEST(romanCalcTest)
 {
-#line 37
+#line 40
 	char buffer[20];
 	
 	ck_assert_int_eq(add2romanNum("I", "I", buffer), 1);
+	
+	uncompactRoman("CDLXXIX", buffer);
+	ck_assert_str_eq(buffer, "CCCCLXXVIIII");
 }
 END_TEST
 

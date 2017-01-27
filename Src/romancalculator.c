@@ -19,20 +19,17 @@ void uncompactRoman(const char romanNum[], char uncompactRomanNum[])
 	uint8_t i;
 	char *ptr;
 	
-	char tmpRomanNum[20];
-	strcpy(tmpRomanNum, romanNum);
-	char *romanNumPtr = tmpRomanNum;
-	
-	for(i = 0; i < 6 && *romanNumPtr != '\0'; i++)
+	for(i = 0; i < 6 && *romanNum != '\0'; i++)
 	{
-		ptr = strstr(romanNumPtr, subtractive[i]);
+		ptr = strstr(romanNum, subtractive[i]);
 		
 		if(ptr != NULL)
-		{
-			*ptr = '\0';
-			strcpy(uncompactRomanNum,romanNumPtr);
-			uncompactRomanNum += strlen(romanNumPtr);
-			romanNumPtr += strlen(romanNumPtr) + 2;
+		{			
+			while(romanNum != ptr)
+			{
+				*(uncompactRomanNum++) = *(romanNum++);
+			}
+			romanNum += 2;
 			strcpy(uncompactRomanNum,subSubstitute[i]);
 			uncompactRomanNum += strlen(subSubstitute[i]);
 		}
