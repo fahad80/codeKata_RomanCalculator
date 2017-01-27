@@ -3,7 +3,7 @@ CC = gcc
 INC_DIR = ./Include
 SRC_DIR = ./Src
 OBJ_DIR = ./Object
-CFLAGS  =-c -Wall
+CFLAGS  =-c -Wall -g
 SRCS = $(SRC_DIR)/main.c $(SRC_DIR)/romanconverter.c $(SRC_DIR)/romancalculator.c
 OBJS = $(OBJ_DIR)/main.o $(OBJ_DIR)/romanconverter.o $(OBJ_DIR)/romancalculator.o
 INCLUDES = -I$(INC_DIR)
@@ -19,7 +19,7 @@ all: $(OBJS)
  
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	$(CC) $(CFLAGS) $(INCLUDES) $< -o $@
 	
 
 test: romanTest

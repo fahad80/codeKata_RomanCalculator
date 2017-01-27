@@ -57,13 +57,13 @@ uint16_t roman2dec_str(const char romanStr[])
 		else
 			resultDecVal += romanEquDecVal;
 		
-		if(resultDecVal > 4999)
-			return 0;
+		//if(resultDecVal > 4999)
+		//	return 0;
 			
 		prevDecValue = romanEquDecVal;
 	}
 	
-	{
+	/*{
 		char convertedRomanNum[20];
 		dec2roman(resultDecVal,convertedRomanNum);
 		
@@ -72,19 +72,13 @@ uint16_t roman2dec_str(const char romanStr[])
 		strupr(copiedRomanStr);
 		if(strcmp(copiedRomanStr, convertedRomanNum) != 0)
 			return 0;
-	}
+	}*/
 		
 	return resultDecVal; 
 }
 
-uint8_t dec2roman(uint16_t decNum, char romanNum[])
+void dec2roman(uint16_t decNum, char romanNum[])
 {
-	if(decNum > 4999)
-	{
-		*romanNum = '\0';
-		return 0;
-	}
-	
 	uint8_t i = 0;
 	while(decNum != 0)
 	{		
@@ -98,14 +92,14 @@ uint8_t dec2roman(uint16_t decNum, char romanNum[])
 	}
 	
 	*romanNum = '\0';
-	return 1;
 }
 
 
-uint8_t isItValidRomanNum(const char romanNum[])
+/*uint8_t isItValidRomanNum(const char romanNum[])
 {
 	if(roman2dec_str(romanNum))
 		return 1;
 	
 	return 0;
 }
+*/
