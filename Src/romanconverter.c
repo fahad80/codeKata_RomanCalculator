@@ -3,9 +3,19 @@
 #include <stdlib.h>
 #include "romanconverter.h"
 
-const int romanDecValue[] 	= {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
-const char *romanNumeral[]	= {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+static const int romanDecValue[] 	= {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+static const char *romanNumeral[]	= {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
 
+
+void strupr(char s[])
+{
+	char *tmp = s;
+
+    for (;*tmp;tmp++) 
+    {
+        *tmp = toupper(*tmp);
+    }
+}
 
 uint16_t roman2dec_char(char romanChar)
 {
@@ -98,14 +108,4 @@ uint8_t isItValidRomanNum(const char romanNum[])
 		return 1;
 	
 	return 0;
-}
-
-void strupr(char s[])
-{
-	char *tmp = s;
-
-    for (;*tmp;tmp++) 
-    {
-        *tmp = toupper(*tmp);
-    }
 }

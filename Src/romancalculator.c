@@ -3,9 +3,9 @@
 #include <stdlib.h>
 #include "romancalculator.h"
 
-const char *subtractive[] 	= {"CM", "CD", "XC", "XL", "IX", "IV"};
-const char *subSubstitute[] = {"DCCCC", "CCCC", "LXXXX", "XXXX", "VIIII", "IIII"};
-const char romanNumerals[]	= "IVXLCDM";
+static const char *subtractive[] 	= {"CM", "CD", "XC", "XL", "IX", "IV"};
+static const char *subSubstitute[] = {"DCCCC", "CCCC", "LXXXX", "XXXX", "VIIII", "IIII"};
+static const char romanNumerals[]	= "IVXLCDM";
 
 
 
