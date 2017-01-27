@@ -52,7 +52,9 @@ END_TEST
 START_TEST(romanCalcTest)
 {
 #line 40
-	char buffer[20];
+	char buffer[20] = "CLXVICXIXICI";
+	bubble_sort_descending(buffer);
+	ck_assert_str_eq(buffer, "CCCLXXXVIIII");
 	
 	ck_assert_int_eq(add2romanNum("I", "I", buffer), 1);
 	
