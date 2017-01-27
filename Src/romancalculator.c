@@ -33,7 +33,7 @@ void uncompactRoman(const char romanNum[], char uncompactRomanNum[])
 				*(uncompactRomanNum++) = *(romanNum++);
 			}
 			romanNum += 2;
-			strcpy(uncompactRomanNum,subSubstitute[i]);
+			strcpy(uncompactRomanNum, subSubstitute[i]);
 			uncompactRomanNum += strlen(subSubstitute[i]);
 		}
 	}
@@ -103,7 +103,7 @@ void combineRomanNum(char romanNum[])
 				*(startPtr++) = romanNumerals[i+1];
 			}
 			
-			char *tmp = startPtr;
+			char *tmpPtr = startPtr;
 			for(j = count%divisor[i]; j > 0; j--)
 			{
 				*(startPtr++) = romanNumerals[i];
@@ -116,7 +116,31 @@ void combineRomanNum(char romanNum[])
 			}
 						
 			*startPtr = '\0';
-			prevStartPtr = tmp;
+			prevStartPtr = tmpPtr;
+		}
+	}
+}
+
+
+void compactRoman(char romanNum[])
+{
+	uint8_t i;
+	char *ptr;
+	
+	for(i = 0; i < 6; i++)
+	{
+		ptr = strstr(romanNum, subSubstitute[i]);
+		
+		if(ptr != NULL)
+		{			
+			strcpy(ptr, subtractive[i]);
+			
+			char *tmpPtr = ptr + 2;
+			ptr += strlen(subSubstitute[i]);
+			while(*ptr != '\0')
+				*(tmpPtr++) = *(ptr++);
+			
+			*tmpPtr = '\0';
 		}
 	}
 }
