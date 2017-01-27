@@ -4,7 +4,7 @@
 #include "romancalculator.h"
 
 static const char *subtractive[] 	= {"CM", "CD", "XC", "XL", "IX", "IV"};
-static const char *subSubstitute[] = {"DCCCC", "CCCC", "LXXXX", "XXXX", "VIIII", "IIII"};
+static const char *subSubstitute[] 	= {"DCCCC", "CCCC", "LXXXX", "XXXX", "VIIII", "IIII"};
 static const char romanNumerals[]	= "IVXLCDM";
 
 
@@ -14,6 +14,8 @@ uint8_t add2romanNum(const char romanNum1[], const char romanNum2[], char result
 	
 	return 1;
 }
+
+
 
 void uncompactRoman(const char romanNum[], char uncompactRomanNum[])
 {
@@ -38,6 +40,8 @@ void uncompactRoman(const char romanNum[], char uncompactRomanNum[])
 	
 	*uncompactRomanNum = '\0';
 }
+
+
 
 void bubble_sort_descending(char romanNum[])
 {
@@ -70,5 +74,49 @@ void bubble_sort_descending(char romanNum[])
 	for(i = 0; i < length; i++)
 	{
 		*(romanNum + i) = romanNumerals[list[i]];
+	}
+	
+	free(list);
+}
+
+
+void combineRomanNum(char romanNum[])
+{
+	char *startPtr;
+	char *prevStartPtr;
+	uint8_t divisor[] = {5,2,5,2,5,2};
+
+	uint8_t i;
+	for(i = 0; i < 6; i++)
+	{
+		startPtr = strchr(romanNum, romanNumerals[i]);
+		
+		if(startPtr != NULL)
+		{			
+			uint8_t count = 0;
+			while( *(startPtr + count) == romanNumerals[i])
+				count++;
+			
+			uint8_t j;
+			for(j = count/divisor[i]; j > 0; j--)
+			{
+				*(startPtr++) = romanNumerals[i+1];
+			}
+			
+			char *tmp = startPtr;
+			for(j = count%divisor[i]; j > 0; j--)
+			{
+				*(startPtr++) = romanNumerals[i];
+			}
+			
+			if(romanNumerals[i] != 'I')
+			{	
+				while(*prevStartPtr != '\0')
+					*(startPtr++) = *(prevStartPtr++);
+			}
+						
+			*startPtr = '\0';
+			prevStartPtr = tmp;
+		}
 	}
 }
