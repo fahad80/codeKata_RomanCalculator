@@ -14,7 +14,6 @@
 /*------------------------------*/
 #include <string.h>
 #include <stdio.h>
-#include <stdint.h>
 #include <ctype.h>
 #include <stdlib.h>
 #include "romancalculator.h"
@@ -40,6 +39,8 @@ static void bubble_sort_descending(char*);
 static void combineRomanNum(char*);
 static void compactRoman(char*);
 static void crossOutCommons(char*, char*);
+static uint8_t isNum1greaterThanNum2(char*, char*);
+static void strupr(char*);
 
 
 
@@ -53,18 +54,58 @@ static void crossOutCommons(char*, char*);
   * 		result	 : Subtraction holder. An array of size 30 is advisable. 
   * @retval None
   */
-void sub2romanNum(const char romanNum1[], const char romanNum2[], char result[])
+uint8_t sub2romanNum(const char romanNum1[], const char romanNum2[], char result[])
 {
+	if(strlen(romanNum1) == 0)
+		return 0;
+	
 	char mutableRomanNum2[30];
 	
 	uncompactRoman(romanNum1, result);
 	uncompactRoman(romanNum2, mutableRomanNum2);
 	
+	if(!isNum1greaterThanNum2(result,mutableRomanNum2))
+		return 0;
+	
 	crossOutCommons(result, mutableRomanNum2);
 	bubble_sort_descending(result);
 	compactRoman(result);
+	
+	return 1;
 }
 
+
+uint8_t isNum1greaterThanNum2(char num1[], char num2[])
+{
+	uint8_t i = 0;
+	
+	while(1)
+	{
+		if(num1[i] != num2[i])
+		{
+			if(num2[i] == '\0')
+				break;
+			
+			uint8_t j = 0;
+			while(num1[i] != romanNumerals[j++]);
+			
+			uint8_t k = 0;
+			while(num2[i] != romanNumerals[k++]);
+			
+			if(--j > --k)
+				break;
+			else
+				return 0;
+		}
+		else
+		{
+			if(num1[++i] == '\0') 
+				return 0;
+		}
+	}
+	
+	return 1;
+}
 
 
 /**
@@ -298,4 +339,15 @@ void compactRoman(char romanNum[])
 			*tmpPtr = '\0';
 		}
 	}
+}
+
+
+void strupr(char s[])
+{
+	char *tmp = s;
+
+    for (;*tmp;tmp++) 
+    {
+        *tmp = toupper(*tmp);
+    }
 }

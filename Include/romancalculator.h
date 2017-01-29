@@ -12,11 +12,13 @@
 #define ROMANCALCULATOR_H
 
 
+#include <stdint.h>
+
 /*-------------------------------------------*/
 /*********** Function Declarations ***********/
 /*-------------------------------------------*/
 void add2romanNum(const char*, const char*, char*);
-void sub2romanNum(const char*, const char*, char*);
+uint8_t sub2romanNum(const char*, const char*, char*);
 
 
 #endif /* ROMANCALCULATOR_H */

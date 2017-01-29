@@ -49,8 +49,11 @@ START_TEST(romanCalcTest)
 	ck_assert_str_eq(buffer, "MMDCLXXXII");
 	
 
-	sub2romanNum("CXXIX", "XLIII", buffer);
+	ck_assert_int_eq(sub2romanNum("CXXIX", "XLIII", buffer), 1);
 	ck_assert_str_eq(buffer, "LXXXVI");
+	
+	ck_assert_int_eq(sub2romanNum("MM", "MMM", buffer), 0);
+	ck_assert_int_eq(sub2romanNum("", "MMM", buffer), 0);
 }
 END_TEST
 
