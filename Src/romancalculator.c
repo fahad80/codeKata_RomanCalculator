@@ -77,6 +77,13 @@ uint8_t sub2romanNum(const char romanNum1[], const char romanNum2[], char result
 }
 
 
+/**
+  * @brief  Check if number1 is greater than number2
+  * @param  num1: First roman number
+  * 		num2: Second roman number
+  * @retval 1: num1 > num2
+  * 		0: num1 <= num2
+  */
 uint8_t isNum1greaterThanNum2(char num1[], char num2[])
 {
 	uint8_t i = 0;
@@ -110,7 +117,13 @@ uint8_t isNum1greaterThanNum2(char num1[], char num2[])
 }
 
 
-
+/**
+  * @brief  Check if the provided roman is valid.
+  * @param  num: The roman number that needs to be checked
+  * @note   The fuunction will check against "IVXLCDM". So small letters will throw error.
+  * @retval 1: Valid roman number
+  * 		0: Invalid roman number
+  */
 uint8_t isItValidRomanNum(const char num[])
 {
 	uint8_t i, j;
