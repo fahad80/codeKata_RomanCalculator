@@ -45,8 +45,8 @@ START_TEST(romanCalcTest)
 	
 	char buffer[40];
 
-	add2romanNum("C", "D", buffer);
-	ck_assert_str_eq(buffer, "DC");
+	add2romanNum("MMXVI", "DCLXVI", buffer);
+	ck_assert_str_eq(buffer, "MMDCLXXXII");
 	
 
 	sub2romanNum("CXXIX", "XLIII", buffer);

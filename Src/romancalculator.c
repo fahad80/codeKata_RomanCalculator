@@ -1,7 +1,29 @@
+/**
+  *********************************************************************
+  * @file       romancalculator.c 
+  * @author     Fahad Mirza (fahadmirza80@yahoo.com)
+  * @version    V1.0
+  * @brief      Roman Number Arithmetics (+, -)
+  *********************************************************************
+  */
+
+
+
+/*------------------------------*/
+/*********** Includes ***********/
+/*------------------------------*/
+#include <string.h>
+#include <stdio.h>
+#include <stdint.h>
 #include <ctype.h>
 #include <stdlib.h>
 #include "romancalculator.h"
 
+
+
+/*--------------------------------------*/
+/*********** Global Variables ***********/
+/*--------------------------------------*/
 static const char *subtractive[] 	= {"CM", "CD", "XC", "XL", "IX", "IV"};
 static const char *subSubstitute[] 	= {"DCCCC", "CCCC", "LXXXX", "XXXX", "VIIII", "IIII"};
 static const char romanNumerals[]	= "IVXLCDM";
@@ -9,16 +31,28 @@ static const char *expandedRomans[]	= {"\0", "IIIII", "VV", "XXXXX", "LL", "CCCC
 
 
 
+
+/*-------------------------------------------*/
+/*********** Function Declarations ***********/
+/*-------------------------------------------*/
 static void uncompactRoman(const char*, char*);
 static void bubble_sort_descending(char*);
 static void combineRomanNum(char*);
 static void compactRoman(char*);
-static void crossOutCommons(char*, const char*);
+static void crossOutCommons(char*, char*);
 
 
 
-
-
+/*------------------------------------------*/
+/*********** Function Definitions ***********/
+/*------------------------------------------*/
+/**
+  * @brief  Subtract two roman numbers.
+  * @param  romanNum1: Subtract from - the bigger number
+  * 		romanNum2: The smaller number
+  * 		result	 : Subtraction holder. An array of size 30 is advisable. 
+  * @retval None
+  */
 void sub2romanNum(const char romanNum1[], const char romanNum2[], char result[])
 {
 	char mutableRomanNum2[30];
@@ -31,7 +65,16 @@ void sub2romanNum(const char romanNum1[], const char romanNum2[], char result[])
 	compactRoman(result);
 }
 
-void crossOutCommons(char num1[], const char num2[])
+
+
+/**
+  * @brief  Crossout symbols from num1 that num2 have.
+  * @param  num1: The bigger roman number
+  * 		num2: The smaller roman number
+  * @note   num1 will hold the end result
+  * @retval None
+  */
+void crossOutCommons(char num1[], char num2[])
 {
 	uint8_t i = 0;
 	char *ptr;
@@ -83,6 +126,14 @@ void crossOutCommons(char num1[], const char num2[])
 
 
 
+
+/**
+  * @brief  Addition of two roman numbers
+  * @param  romanNum1: First roman number
+  * 		romanNum2: Second roman number
+  * 		result   : Summition holder. An array of size 30 is advisable. 
+  * @retval None
+  */
 void add2romanNum(const char romanNum1[], const char romanNum2[], char result[])
 {
 	uncompactRoman(romanNum1, result);
@@ -93,6 +144,13 @@ void add2romanNum(const char romanNum1[], const char romanNum2[], char result[])
 
 }
 
+
+/**
+  * @brief  Convert any subtractive prefixes to additive suffixes
+  * @param  romanNum		 : The roman number
+  * 		uncompactRomanNum: Holder of uncompact version of romanNum 
+  * @retval None
+  */
 void uncompactRoman(const char romanNum[], char uncompactRomanNum[])
 {
 	uint8_t i;
@@ -122,6 +180,11 @@ void uncompactRoman(const char romanNum[], char uncompactRomanNum[])
 
 
 
+/**
+  * @brief  Sort the provided roman number in descending order
+  * @param  romanNum: The roman number
+  * @retval None
+  */
 void bubble_sort_descending(char romanNum[])
 {
 	uint8_t length = strlen(romanNum);
@@ -159,6 +222,12 @@ void bubble_sort_descending(char romanNum[])
 }
 
 
+
+/**
+  * @brief  Do internal sums (e.g., replace “IIIII” with “V”)
+  * @param  romanNum: The roman number
+  * @retval None
+  */
 void combineRomanNum(char romanNum[])
 {
 	char *startPtr;
@@ -202,6 +271,12 @@ void combineRomanNum(char romanNum[])
 }
 
 
+
+/**
+  * @brief  Convert back to subtractive prefixes.
+  * @param  romanNum: The Roman number
+  * @retval None
+  */
 void compactRoman(char romanNum[])
 {
 	uint8_t i;
