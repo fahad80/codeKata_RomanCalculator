@@ -17,10 +17,12 @@ int main()
 	char num2[30];
 	
 	
-	printf("*** Addition of two roman numbers ***\n");
+	printf("\n*** Addition of two roman numbers ***\n");
+	
 	printf("Enter first number: ");
 	fgets (num1, 29, stdin);
 	num1[strcspn(num1, "\r\n")] = 0;
+	
 	printf("Enter second number: ");
 	fgets (num2, 29, stdin);
 	num2[strcspn(num2, "\r\n")] = 0;
@@ -28,7 +30,7 @@ int main()
 	if(add2romanNum(num1, num2, result))
 		printf("%s + %s = %s\n", num1, num2, result);
 	else
-		printf("Failed!");
+		printf("Failed to add!\n");
 	
 	
 	
@@ -49,7 +51,7 @@ int main()
 		printf("%s - %s = %s\n", num1, num2, result);
 	}
 	else
-		printf("Failed!\n");
+		printf("Failed to subtract!\n");
 	
     return 0;
 }

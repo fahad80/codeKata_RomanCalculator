@@ -47,161 +47,6 @@ static uint8_t isItValidRomanNum(const char*);
 /*------------------------------------------*/
 /*********** Function Definitions ***********/
 /*------------------------------------------*/
-/**
-  * @brief  Subtract two roman numbers.
-  * @param  romanNum1: Subtract from - the bigger number
-  * 		romanNum2: The smaller number
-  * 		result	 : Subtraction holder. An array of size 30 is advisable. 
-  * @retval 1: Successful operation
-  * 		0: Failed
-  */
-uint8_t sub2romanNum(const char romanNum1[], const char romanNum2[], char result[])
-{
-	if((strlen(romanNum1) == 0) || !isItValidRomanNum(romanNum1) || !isItValidRomanNum(romanNum2))
-		return 0;
-	
-	
-	char mutableRomanNum2[30];
-		
-	uncompactRoman(romanNum1, result);
-	uncompactRoman(romanNum2, mutableRomanNum2);
-	
-	if(!isNum1greaterThanNum2(result,mutableRomanNum2))
-		return 0;
-	
-	crossOutCommons(result, mutableRomanNum2);
-	bubble_sort_descending(result);
-	compactRoman(result);
-	
-	return 1;
-}
-
-
-/**
-  * @brief  Check if number1 is greater than number2
-  * @param  num1: First roman number
-  * 		num2: Second roman number
-  * @retval 1: num1 > num2
-  * 		0: num1 <= num2
-  */
-uint8_t isNum1greaterThanNum2(char num1[], char num2[])
-{
-	uint8_t i = 0;
-	
-	while(1)
-	{
-		if(num1[i] != num2[i])
-		{
-			if(num2[i] == '\0')
-				break;
-			
-			uint8_t j = 0;
-			while(num1[i] != romanNumerals[j++]);
-			
-			uint8_t k = 0;
-			while(num2[i] != romanNumerals[k++]);
-			
-			if(--j > --k)
-				break;
-			else
-				return 0;
-		}
-		else
-		{
-			if(num1[++i] == '\0') 
-				return 0;
-		}
-	}
-	
-	return 1;
-}
-
-
-/**
-  * @brief  Check if the provided roman is valid.
-  * @param  num: The roman number that needs to be checked
-  * @note   The fuunction will check against "IVXLCDM". So small letters will throw error.
-  * @retval 1: Valid roman number
-  * 		0: Invalid roman number
-  */
-uint8_t isItValidRomanNum(const char num[])
-{
-	uint8_t i, j;
-	for(i = 0; num[i] != '\0'; i++)
-	{
-		for(j = 0; j < 7; j++)
-		{
-			if(num[i] == romanNumerals[j])
-				break;
-		}
-		
-		if(j == 7)
-			return 0;
-	}
-	
-	return 1;
-}
-
-
-/**
-  * @brief  Crossout symbols from num1 that num2 have.
-  * @param  num1: The bigger roman number
-  * 		num2: The smaller roman number
-  * @note   num1 will hold the end result
-  * @retval None
-  */
-void crossOutCommons(char num1[], char num2[])
-{
-	uint8_t i = 0;
-	char *ptr;
-	
-	while( num2[i] != '\0')
-	{
-		ptr = strchr(num1, num2[i]);
-		
-		if(ptr != NULL)
-		{
-			while(*ptr != '\0')
-			{
-				*ptr = *(ptr + 1);
-				ptr++;
-			}
-			
-			i++;
-		}
-		else
-		{
-			int8_t j = 0;
-			
-			while(num2[i] != romanNumerals[j++]);
-			
-			while(j >= 0 && j < 7)
-			{
-				ptr = strchr(num1, romanNumerals[j]);
-				
-				if(ptr != NULL)
-				{
-					while(*(++ptr) != '\0')
-					{
-						*(ptr - 1) = *ptr;
-					}
-					strcpy(--ptr, expandedRomans[j]);
-					ptr += strlen(expandedRomans[j]);
-					*ptr = '\0';
-					
-					break;
-				}
-				else
-					j++;
-			}
-			
-		}
-		
-	}
-}
-
-
-
 
 /**
   * @brief  Addition of two roman numbers
@@ -379,3 +224,162 @@ void compactRoman(char romanNum[])
 		}
 	}
 }
+
+
+
+
+/**
+  * @brief  Subtract two roman numbers.
+  * @param  romanNum1: Subtract from - the bigger number
+  * 		romanNum2: The smaller number
+  * 		result	 : Subtraction holder. An array of size 30 is advisable. 
+  * @retval 1: Successful operation
+  * 		0: Failed
+  */
+uint8_t sub2romanNum(const char romanNum1[], const char romanNum2[], char result[])
+{
+	if((strlen(romanNum1) == 0) || !isItValidRomanNum(romanNum1) || !isItValidRomanNum(romanNum2))
+		return 0;
+	
+	
+	char mutableRomanNum2[30];
+		
+	uncompactRoman(romanNum1, result);
+	uncompactRoman(romanNum2, mutableRomanNum2);
+	
+	if(!isNum1greaterThanNum2(result,mutableRomanNum2))
+		return 0;
+	
+	crossOutCommons(result, mutableRomanNum2);
+	bubble_sort_descending(result);
+	compactRoman(result);
+	
+	return 1;
+}
+
+
+
+/**
+  * @brief  Crossout symbols from num1 that num2 have.
+  * @param  num1: The bigger roman number
+  * 		num2: The smaller roman number
+  * @note   num1 will hold the end result
+  * @retval None
+  */
+void crossOutCommons(char num1[], char num2[])
+{
+	uint8_t i = 0;
+	char *ptr;
+	
+	while( num2[i] != '\0')
+	{
+		ptr = strchr(num1, num2[i]);
+		
+		if(ptr != NULL)
+		{
+			while(*ptr != '\0')
+			{
+				*ptr = *(ptr + 1);
+				ptr++;
+			}
+			i++;
+		}
+		else
+		{
+			int8_t j = 0;
+			
+			while(num2[i] != romanNumerals[j++]);
+			
+			while(j >= 0 && j < 7)
+			{
+				ptr = strchr(num1, romanNumerals[j]);
+				
+				if(ptr != NULL)
+				{
+					while(*(++ptr) != '\0')
+					{
+						*(ptr - 1) = *ptr;
+					}
+					strcpy(--ptr, expandedRomans[j]);
+					ptr += strlen(expandedRomans[j]);
+					*ptr = '\0';
+					
+					break;
+				}
+				else
+					j++;
+			}
+			
+		}
+		
+	}
+}
+
+
+
+
+/**
+  * @brief  Check if number1 is greater than number2
+  * @param  num1: First roman number
+  * 		num2: Second roman number
+  * @retval 1: num1 > num2
+  * 		0: num1 <= num2
+  */
+uint8_t isNum1greaterThanNum2(char num1[], char num2[])
+{
+	uint8_t i = 0;
+	
+	while(1)
+	{
+		if(num1[i] != num2[i])
+		{
+			if(num2[i] == '\0')
+				break;
+			
+			uint8_t j = 0;
+			while(num1[i] != romanNumerals[j++]);
+			
+			uint8_t k = 0;
+			while(num2[i] != romanNumerals[k++]);
+			
+			if(--j > --k)
+				break;
+			else
+				return 0;
+		}
+		else
+		{
+			if(num1[++i] == '\0') 
+				return 0;
+		}
+	}
+	
+	return 1;
+}
+
+
+/**
+  * @brief  Check if the provided roman is valid.
+  * @param  num: The roman number that needs to be checked
+  * @note   The fuunction will check against "IVXLCDM". So small letters will throw error.
+  * @retval 1: Valid roman number
+  * 		0: Invalid roman number
+  */
+uint8_t isItValidRomanNum(const char num[])
+{
+	uint8_t i, j;
+	for(i = 0; num[i] != '\0'; i++)
+	{
+		for(j = 0; j < 7; j++)
+		{
+			if(num[i] == romanNumerals[j])
+				break;
+		}
+		
+		if(j == 7)
+			return 0;
+	}
+	
+	return 1;
+}
+
