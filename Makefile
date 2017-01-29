@@ -8,7 +8,7 @@ SRCS = $(SRC_DIR)/main.c $(SRC_DIR)/romanconverter.c $(SRC_DIR)/romancalculator.
 OBJS = $(OBJ_DIR)/main.o $(OBJ_DIR)/romanconverter.o $(OBJ_DIR)/romancalculator.o
 INCLUDES = -I$(INC_DIR)
 
-EXEC = romanConverter
+EXEC = romanCalculator
 
 LIBS=-lcheck
 
@@ -42,5 +42,5 @@ clean:
 	-rm $(SRC_DIR)/roman-test.c
 	
 cleanTest:
-	-rm romanConverterTest
+	-rm romanTest
 	-rm $(SRC_DIR)/roman-test.c
