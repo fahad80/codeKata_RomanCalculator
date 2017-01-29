@@ -13,7 +13,7 @@ static void uncompactRoman(const char*, char*);
 static void bubble_sort_descending(char*);
 static void combineRomanNum(char*);
 static void compactRoman(char*);
-//static void crossOutCommons(char*, const char*);
+static void crossOutCommons(char*, const char*);
 
 
 
@@ -21,8 +21,12 @@ static void compactRoman(char*);
 
 void sub2romanNum(const char romanNum1[], const char romanNum2[], char result[])
 {
-	strcpy(result, romanNum1);
-	crossOutCommons(result, romanNum2);
+	char mutableRomanNum2[30];
+	
+	uncompactRoman(romanNum1, result);
+	uncompactRoman(romanNum2, mutableRomanNum2);
+	
+	crossOutCommons(result, mutableRomanNum2);
 	bubble_sort_descending(result);
 	compactRoman(result);
 }

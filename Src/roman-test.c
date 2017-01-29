@@ -34,15 +34,6 @@ START_TEST(romanConverterTest)
 	
 	dec2roman(5000, buffer);
 	ck_assert_str_eq(buffer,"MMMMM");
-	
-
-
-	// check isItValidRomanNumeral
-	//ck_assert_int_eq(isItValidRomanNum("X"),1);
-	//ck_assert_int_eq(isItValidRomanNum("IIX"),0);
-	//ck_assert_int_eq(isItValidRomanNum("XBI"),0);
-	//ck_assert_int_eq(isItValidRomanNum("XXXX"),0);
-	//ck_assert_int_eq(isItValidRomanNum("DD"),0);
 
 
 }
@@ -50,23 +41,16 @@ END_TEST
 
 START_TEST(romanCalcTest)
 {
-#line 39
+#line 30
 	
 	char buffer[40];
+
 	add2romanNum("C", "D", buffer);
 	ck_assert_str_eq(buffer, "DC");
 	
-	strcpy(buffer,"MDCLXVI");
-	crossOutCommons(buffer, "DCLXVI");
-	ck_assert_str_eq(buffer, "M");
-	
-	strcpy(buffer,"V");
-	crossOutCommons(buffer, "I");
-	ck_assert_str_eq(buffer, "IIII");
-	
-	strcpy(buffer,"DCXVII");
-	crossOutCommons(buffer, "XXXVVIII");
-	ck_assert_str_eq(buffer, "DLXXIIII");
+
+	sub2romanNum("CXXIX", "XLIII", buffer);
+	ck_assert_str_eq(buffer, "LXXXVI");
 }
 END_TEST
 

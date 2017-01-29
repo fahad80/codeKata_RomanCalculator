@@ -8,7 +8,6 @@
 
 void add2romanNum(const char*, const char*, char*);
 void sub2romanNum(const char*, const char*, char*);
-void crossOutCommons(char num1[], const char num2[]);
 
 
 #endif /* ROMANCALCULATOR_H */

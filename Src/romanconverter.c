@@ -7,7 +7,7 @@ static const int romanDecValue[] 	= {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9
 static const char *romanNumeral[]	= {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
 
 
-void strupr(char s[])
+static void strupr(char s[])
 {
 	char *tmp = s;
 
@@ -17,7 +17,7 @@ void strupr(char s[])
     }
 }
 
-uint16_t roman2dec_char(char romanChar)
+static uint16_t roman2dec_char(char romanChar)
 {
 	switch(toupper(romanChar))
 	{
