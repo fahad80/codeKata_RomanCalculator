@@ -51,20 +51,14 @@ END_TEST
 START_TEST(romanCalcTest)
 {
 #line 39
-	//char buffer[] = "CLXVICXIXICI";
-	//bubble_sort_descending(buffer);
-	//ck_assert_str_eq(buffer, "CCCLXXXVIIII");
-	
-	//char buffer2[] = "DCCCCCCLXXXXXVVIIII";
-	//combineRomanNum(buffer2);
-	//ck_assert_str_eq(buffer2, "MCCXIIII");
-	
-	//uncompactRoman("CDLXXIX", buffer);
-	//ck_assert_str_eq(buffer, "CCCCLXXVIIII");
 	
 	char buffer[40];
 	add2romanNum("C", "D", buffer);
 	ck_assert_str_eq(buffer, "DC");
+	
+	char num1[] = "MDCLXVI";
+	crossOutCommons(num1, "DCLXVI");
+	ck_assert_str_eq(num1, "M");
 }
 END_TEST
 
