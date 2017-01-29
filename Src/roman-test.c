@@ -56,9 +56,17 @@ START_TEST(romanCalcTest)
 	add2romanNum("C", "D", buffer);
 	ck_assert_str_eq(buffer, "DC");
 	
-	char num1[] = "MDCLXVI";
-	crossOutCommons(num1, "DCLXVI");
-	ck_assert_str_eq(num1, "M");
+	strcpy(buffer,"MDCLXVI");
+	crossOutCommons(buffer, "DCLXVI");
+	ck_assert_str_eq(buffer, "M");
+	
+	strcpy(buffer,"V");
+	crossOutCommons(buffer, "I");
+	ck_assert_str_eq(buffer, "IIII");
+	
+	strcpy(buffer,"DCXVII");
+	crossOutCommons(buffer, "XXXVVIII");
+	ck_assert_str_eq(buffer, "DLXXIIII");
 }
 END_TEST
 

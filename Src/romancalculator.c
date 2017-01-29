@@ -21,20 +21,18 @@ static void compactRoman(char*);
 
 void sub2romanNum(const char romanNum1[], const char romanNum2[], char result[])
 {
-	char mutableRomanNum1[40];
-	strcpy(mutableRomanNum1, romanNum1);
-	
-	crossOutCommons(mutableRomanNum1, romanNum2);
-	
-
+	strcpy(result, romanNum1);
+	crossOutCommons(result, romanNum2);
+	bubble_sort_descending(result);
+	compactRoman(result);
 }
 
 void crossOutCommons(char num1[], const char num2[])
 {
-	uint8_t i;
+	uint8_t i = 0;
 	char *ptr;
 	
-	for(i = 0; num2[i] != '\0'; i++)
+	while( num2[i] != '\0')
 	{
 		ptr = strchr(num1, num2[i]);
 		
@@ -42,10 +40,40 @@ void crossOutCommons(char num1[], const char num2[])
 		{
 			while(*ptr != '\0')
 			{
-				*(ptr) = *(ptr + 1);
+				*ptr = *(ptr + 1);
 				ptr++;
 			}
+			
+			i++;
 		}
+		else
+		{
+			int8_t j = 0;
+			
+			while(num2[i] != romanNumerals[j++]);
+			
+			while(j >= 0 && j < 7)
+			{
+				ptr = strchr(num1, romanNumerals[j]);
+				
+				if(ptr != NULL)
+				{
+					while(*(++ptr) != '\0')
+					{
+						*(ptr - 1) = *ptr;
+					}
+					strcpy(--ptr, expandedRomans[j]);
+					ptr += strlen(expandedRomans[j]);
+					*ptr = '\0';
+					
+					break;
+				}
+				else
+					j++;
+			}
+			
+		}
+		
 	}
 }
 
