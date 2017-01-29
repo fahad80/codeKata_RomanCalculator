@@ -9,11 +9,11 @@ Environment:
 - Check unit testing framework ( https://libcheck.github.io/check/ )
 
 Make:
-"make all" or "make"
-"make test" (for unit testing)
-"make clean"
-"make cleanTest" (to clean unit testing files)
+-"make all" or "make"
+-"make test" (for unit testing)
+-"make clean"
+-"make cleanTest" (to clean unit testing files)
 
 
-Note: The actual library consists of 'romancalculator.h' and 'romancalculator.c' and does not depend on 'romanconverter' lib.
+Note: RomanCalculator just requires 'romancalculator.h' and 'romancalculator.c' and does not depend on 'romanconverter' lib.
 'romanconverter.h' and 'romanconverter.c' was written to conduct tests.
