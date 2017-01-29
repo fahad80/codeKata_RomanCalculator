@@ -30,8 +30,9 @@
 	
 	char buffer[40];
 
-	add2romanNum("MMXVI", "DCLXVI", buffer);
+	ck_assert_int_eq(add2romanNum("MMXVI", "DCLXVI", buffer), 1);
 	ck_assert_str_eq(buffer, "MMDCLXXXII");
+	ck_assert_int_eq(add2romanNum("m", "DCLXVI", buffer), 0);
 	
 
 	ck_assert_int_eq(sub2romanNum("CXXIX", "XLIII", buffer), 1);

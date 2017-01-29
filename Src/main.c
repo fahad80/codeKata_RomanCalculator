@@ -25,8 +25,10 @@ int main()
 	fgets (num2, 29, stdin);
 	num2[strcspn(num2, "\r\n")] = 0;
 	
-	add2romanNum(num1, num2, result);
-	printf("%s + %s = %s\n", num1, num2, result);
+	if(add2romanNum(num1, num2, result))
+		printf("%s + %s = %s\n", num1, num2, result);
+	else
+		printf("Failed!");
 	
 	
 	

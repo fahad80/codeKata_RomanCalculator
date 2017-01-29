@@ -40,7 +40,7 @@ static void combineRomanNum(char*);
 static void compactRoman(char*);
 static void crossOutCommons(char*, char*);
 static uint8_t isNum1greaterThanNum2(char*, char*);
-static void strupr(char*);
+static uint8_t isItValidRomanNum(const char*);
 
 
 
@@ -52,15 +52,17 @@ static void strupr(char*);
   * @param  romanNum1: Subtract from - the bigger number
   * 		romanNum2: The smaller number
   * 		result	 : Subtraction holder. An array of size 30 is advisable. 
-  * @retval None
+  * @retval 1: Successful operation
+  * 		0: Failed
   */
 uint8_t sub2romanNum(const char romanNum1[], const char romanNum2[], char result[])
 {
-	if(strlen(romanNum1) == 0)
+	if((strlen(romanNum1) == 0) || !isItValidRomanNum(romanNum1) || !isItValidRomanNum(romanNum2))
 		return 0;
 	
-	char mutableRomanNum2[30];
 	
+	char mutableRomanNum2[30];
+		
 	uncompactRoman(romanNum1, result);
 	uncompactRoman(romanNum2, mutableRomanNum2);
 	
@@ -102,6 +104,26 @@ uint8_t isNum1greaterThanNum2(char num1[], char num2[])
 			if(num1[++i] == '\0') 
 				return 0;
 		}
+	}
+	
+	return 1;
+}
+
+
+
+uint8_t isItValidRomanNum(const char num[])
+{
+	uint8_t i, j;
+	for(i = 0; num[i] != '\0'; i++)
+	{
+		for(j = 0; j < 7; j++)
+		{
+			if(num[i] == romanNumerals[j])
+				break;
+		}
+		
+		if(j == 7)
+			return 0;
 	}
 	
 	return 1;
@@ -173,16 +195,20 @@ void crossOutCommons(char num1[], char num2[])
   * @param  romanNum1: First roman number
   * 		romanNum2: Second roman number
   * 		result   : Summition holder. An array of size 30 is advisable. 
-  * @retval None
+  * @retval 0: Failed
+  * 		1: Succesful operation
   */
-void add2romanNum(const char romanNum1[], const char romanNum2[], char result[])
+uint8_t add2romanNum(const char romanNum1[], const char romanNum2[], char result[])
 {
+	if((isItValidRomanNum(romanNum1) == 0) || (isItValidRomanNum(romanNum2) == 0))
+		return 0;
 	uncompactRoman(romanNum1, result);
 	uncompactRoman(romanNum2, result + strlen(result));
 	bubble_sort_descending(result);
 	combineRomanNum(result);
 	compactRoman(result);
 
+	return 1;
 }
 
 
@@ -339,15 +365,4 @@ void compactRoman(char romanNum[])
 			*tmpPtr = '\0';
 		}
 	}
-}
-
-
-void strupr(char s[])
-{
-	char *tmp = s;
-
-    for (;*tmp;tmp++) 
-    {
-        *tmp = toupper(*tmp);
-    }
 }

@@ -17,7 +17,7 @@
 /*-------------------------------------------*/
 /*********** Function Declarations ***********/
 /*-------------------------------------------*/
-void add2romanNum(const char*, const char*, char*);
+uint8_t add2romanNum(const char*, const char*, char*);
 uint8_t sub2romanNum(const char*, const char*, char*);
 
 
