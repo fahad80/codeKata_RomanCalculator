@@ -1,7 +1,7 @@
 
 #Code Kata - ROMAN NUMERAL CALCULATOR
 Kata link: http://bit.ly/1VfHqlj
-The Algorithm: <br>
+<br>The Algorithm: <br>
 1) http://turner.faculty.swau.edu/mathematics/materialslibrary/roman/ <br>
 2) http://scienceblogs.com/goodmath/2006/08/16/roman-numerals-and-arithmetic/ <br>
 
@@ -21,6 +21,5 @@ Make:
 Note: RomanCalculator just requires 'romancalculator.h' and 'romancalculator.c' and does not depend on 'romanconverter' lib.
 'romanconverter.h' and 'romanconverter.c' was written to conduct tests.
 
-##Project Euler 89: https://projecteuler.net/problem=89
-
+###Project Euler 89: https://projecteuler.net/problem=89
 <br>How to conver Roman number: http://www.mathsisfun.com/roman-numerals.html
