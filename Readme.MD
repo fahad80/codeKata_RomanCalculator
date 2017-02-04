@@ -5,7 +5,7 @@ Kata link: http://bit.ly/1VfHqlj
 1) http://turner.faculty.swau.edu/mathematics/materialslibrary/roman/ <br>
 2) http://scienceblogs.com/goodmath/2006/08/16/roman-numerals-and-arithmetic/ <br>
 
-Code Explanation: goo.gl/uX6B80 <br>
+Code Explanation: www.goo.gl/uX6B80 <br>
 
 Environment:
 - Ubuntu Linux
